@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='assets/bootstrap/css/bootstrap.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static',filename='assets/script/animate.min.css')}}" type="text/css">
+    <link rel='stylesheet' href="{{url_for('static',filename='assets/fontawesome/css/all.min.css')}}">
+    <title>user Dashboard</title>
+</head>
+
+<style>
+    .form-row{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .form-row .col{
+        flex: 1;
+        margin-right: 10px;
+    }
+    .error_div{
+            background-image: url('/static/img/error404.jpg');
+            height: 77vh;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+    }
+</style>
+
+<body>
+        <div class="container-fluid" style="background-color: #eef2f5; height: 100vh;">
+        <div class="row">
+                <div class="col-12 navbar navbar-expand-lg navbar-light bg-light">
+                    <!-- Left end with icon and school name -->
+                    <a class="navbar-brand" href="#">
+                        <img src = "{{url_for('static',filename='img/logo.png')}}" height="40"/> mySchool
+                    </a>
+            
+                    <!-- Center: Search icon -->
+                    <div class="mx-auto order-0">
+                        <form class="form-inline">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+            
+                    <!-- Right end: Logout with icon -->
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+
+                <!-- Sidebar -->
+                <div class="row">
+                    <nav class="col-md-3 col-lg-2 d-md-block bg-secondary sidebar">
+                        <div class="position-sticky">
+                            <div class="mt-4 mb-2 text-center">
+                                <img src="/static/profiles/{{current_student.std_pix}}" alt="Student" class="img-fluid rounded-circle" id="studentPic">
+                                <span style="color: wheat;">{{current_student.std_firstname}}{{" "}}{{current_student.std_lastname}}<br> 
+                                    <span>{{current_student.std_regnumber}} - ({{ current_student.stdclass.class_name}})</span>
+                                </span>
+                            </div>
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <div id="accountDropdown">
+                                        <a href="{{url_for('dashboard')}}" style="text-decoration: none;">&nbsp; &nbsp; &nbsp;<i class="fa-solid fa-gauge"></i>&nbsp; &nbsp;DashBoard</a>
+                                        <a class="nav-link ml-3" href="#" id="changePassLink">Change Password</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <div id="feesDropdown">
+                                        <a class="nav-link ml-3" href="{{url_for('make_payment')}}" id="makePaymentLink">Make Payment</a>
+                                        <a class="nav-link ml-3" href="{{url_for('outstanding')}}" id="printInvoiceLink">Outstanding Fees</a>
+                                        <a class="nav-link ml-3" href="{{url_for('payment_record')}}" id="paymentHistoryLink">Payment Records</a>
+                                        <a class="nav-link ml-3" href="{{url_for('fees_record')}}" id="feesrec">Fees Records</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+            
+            
+                    
+                    <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                        <div>
+
+                            {% set m = get_flashed_messages(with_categories=True) %}
+                                {% if m: %}
+                                {%for cat,msg in m:%}
+                                    {% if cat == "error"%}
+                                        <div class="alert alert-danger">{{msg}}</div>
+                                    {% else: %}
+                                        <div class="alert alert-success">{{msg}}</div>
+                                    {% endif %}
+                                {% endfor %}
+                                {% endif %}
+
+                            {% block content %}
+                            <!-- body contents -->
+                            {% endblock content%}
+                        </div>
+                    </main>
+                </div>
+        
+
+<div class="row">
+    <div class="col-12 bg-light">
+        
+            <p class="text-center text-danger">Any issues? <a href="mailto:nwagaraxtopher1@gmail.com"><b><i>Send us an email</i></b></a> or call our support on <b><i>08032746255</i></b></p>
+
+            <p class="text-center" style="font-size: smaller;">Copyright @2023 mySchool. All Rights Reserved. &nbsp; &nbsp; Powered by M!!!!!!M</p>
+        
+    </div>
+</div>
+</div>
+
+<!-- Scripts -->
+<script src="{{ url_for('static',filename='assets/script/jquery.js')}}" type="text/javascript"></script>
+<script>
+
+</script>
+
+</body>
+</html>

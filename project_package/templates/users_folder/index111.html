@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="/static/script/animate.min.css" type="text/css">
+    <link rel='stylesheet' href='/static/fontawesome/css/all.min.css'>
+    <title>Document</title>
+
+    <style>
+      #floating-contact {
+          position: fixed;
+          bottom: 25px;
+          right: 20px;
+          z-index: 1000;
+      }
+
+      .mybg{
+        background-color: #6c757d;
+      }
+
+      .form-row{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .form-row .col{
+        flex: 1;
+        margin-right: 10px;
+      }
+    
+      #contact-form {
+          position: fixed;
+          top: 100px;
+          right: 20px;
+          z-index: 999;
+          width: 25%;
+          display: none;
+          animation-duration: 0.5s;
+      }
+
+      #selectusertype, #studentsreg, #parentsreg, #staffreg
+      {
+        display: none;
+      }
+
+      .universitylevel, .secondarylevel, .primarylevel {
+        display: none;
+      }
+
+
+      @keyframes slideUp {
+         from {
+             transform: translateY(100%);
+          }
+
+          to {
+             transform: translateY(0);
+         }
+     }
+
+      .show-form {
+         animation-name: slideUp;
+      }
+    </style>
+</head>
+<body> 
+      <div class="container-fluid mybg" style="height: 100vh;">     
+        <div id="signin" class="row align-items-center" style="height: 100vh;">
+          <div class="mx-auto col-10 col-md-8 col-lg-5">
+            <!-- Form -->
+            <form class="bg-light p-5 rounded" action="user.html" method="post">
+              <h1>Sign Into Your Account</h1><br>
+              <!-- Input fields -->
+              <div class="form-group">
+                <label for="username"><b>Reg No. Or Email:.</b></label>
+                <input type="text" class="form-control username" id="username" placeholder="Reg No Or Email..." name="username" required/>
+              </div>
+              <div class="form-group">
+                <label for="password"><b>Password:.</b></label>
+                <input type="password" class="form-control password" id="password" placeholder="Password..." name="password" required/>
+              </div>
+              <div class="form-group form-check">
+                <a href="#" class="text-decoration-none mb-3 d-block float-end">Forgot password?</a>
+                <input type="checkbox" class="form-check-input" id="rememberMe">
+                <label class="form-check-label" for="rememberMe">Remember me</label>
+            </div>
+    
+              <button type="submit" class="btn btn-primary btn-customized mt-4 form-control rounded">
+                Login
+              </button><br><br>
+              <p class="text-center"><i>Don't have Account yet?.. </i><a href="#" id="createaccount" ><b>CREATE ACCOUNT</b></a></p>
+            </form>
+            <!-- Form end -->
+            <br>
+            <p class="text-center text-danger rounded bg-light">Any issues? <a href="mailto:nwagaraxtopher1@gmail.com"><b><i>Send us an email</i></b></a> or call our support on <b><i>08032746255</i></b></p>
+          </div>
+      </div>
+
+      <!-- Create Account starts here-->
+        <div id="selectusertype" class="row align-items-center">
+            <div class="mx-auto col-10 col-md-8 col-lg-5">
+            
+              <form class="bg-light p-5 rounded text-center" action="" method="post">
+                <h2>Create User Account</h2>
+                <label for="usertype"><b>Select User Type &nbsp;</b></label><br>
+                <input class="userval" name="usertype" type="radio" value="students"><b> Student &nbsp;</b></input>
+                <input class="userval" name="usertype" type="radio" value="parents"><b> Parents &nbsp;</b></input>
+                <input class="userval" name="usertype" type="radio" value="admin"><b> Admin</b></input>
+              </form>
+            </div>
+          </div>
+
+            <!-- Student Registration Form-->
+          <div id="studentsreg" class="row align-items-center">
+              <div class="mx-auto col-10 col-md-8 col-lg-5">
+                  <form id="studentform" class="bg-light p-5 rounded" action="" method="post">
+                    <h2>Students Registration Form</h2>
+                    <div class="form-row"> <!-- Bootstrap's form-row class -->
+                      <div class="col-6 col-md"> 
+                          <label for="firstName">First Name</label>
+                          <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
+                      </div>
+                      <div class="col-6 col-md">
+                          <label for="lastName">Last Name</label>
+                          <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+                      </div>
+                    </div><br>
+                    <div class="form-group">
+                      <label for="middlename">Middle Name</label>
+                      <input type="text" class="form-control middlename" id="middlename" placeholder="Middle Name..." name="middlename"/>
+                    </div><br>
+                    <div class="form-row"> <!-- Bootstrap's form-row class -->
+                      <div class="col-6 col-md"> 
+                          <label for="regnumber">Registration Number</label>
+                          <input type="text" class="form-control" id="regnumber" placeholder="2023/164702" required>
+                      </div>
+                      <div class="col-6 col-md">
+                          <label for="enro">Enrroment Date</label>
+                          <input type="date" class="form-control enroment" id="enro" required>
+                      </div>
+                    </div><br>
+                    <div class="form-row"><!-- Bootstrap's form-row class -->
+                      <div class="col-6 col-md"> 
+                          <label for="email">Email Adress</label>
+                          <input type="email" class="form-control" id="email" placeholder="email" required>
+                      </div>
+                      <div class="col-6 col-md">
+                          <label for="dob">Date of Birth</label>
+                          <input type="date" class="form-control" id="dob" required>
+                      </div>
+                    </div><br>
+                    <div class="form-row"> <!-- Bootstrap's form-row class -->
+                      <div class="col-6 col-md"> 
+                          <label for="password">Enter password</label>
+                          <input type="password" class="form-control" id="password" placeholder="Enter password..." required>
+                      </div>
+                      <div class="col-6 col-md">
+                          <label for="confirmpassword">Confirm password</label>
+                          <input type="password" class="form-control enroment" id="confirmpassword" placeholder="Confirm password..." required>
+                      </div>
+                    </div><br>
+                    <div class="form-row"> <!-- Bootstrap's form-row class -->
+                          <div class="col-6 col-md"> 
+                              <label for="parentsName">Parent/Guardian Name</label>
+                              <input type="text" class="form-control" id="parentstName" placeholder="Parent/Guardian name" required>
+                          </div>
+                          <div class="col-6 col-md">
+                              <label for="parentsPhone">Parent/Guardian phone</label>
+                              <input type="text" class="form-control" id="parentsPhone" placeholder="Parents/Guardian phone..." required>
+                          </div>
+                    </div><br>
+                    <div id="academiclevelid" class="form-group">
+                      <label for="usertype"><b>Academic Class &nbsp;</b></label>
+                        <input class="academiclevel" name="usertype" type="radio" value="primary" id="primary"><b> Primary &nbsp;</b></input>
+                        <input class="academiclevel" name="usertype" type="radio" value="secondary" id="secondary"><b> Secondary &nbsp;</b></input>
+                    </div><br>
+                    <!-- For primary -->
+                    <div class="form-group primarylevel">
+                      <label><b>Select Class</b></label>
+                        <select>
+                          <option value="">Select Class</option>
+                          <option value="primary One">Primary ONE</option>
+                          <option value="Primary TWO">Primary TWO</option>
+                          <option value="Primary THREE">Primary THREE</option>
+                          <option value="Primary FOUR">Primary FOUR</option>
+                          <option value="Primary FIVE">Primary FIVE</option>
+                          <option value="Primary SIX">Primary SIX</option>
+                        </select>
+                    </div>
+                    <!-- For secondary -->
+                    <div class="form-group secondarylevel">
+                      <label><b>Select Class</b></label>
+                        <select>
+                          <option value="">Select Class</option>
+                          <option value="JSS One">JSS ONE</option>
+                          <option value="JSS TWO">JSS TWO</option>
+                          <option value="JSS THREE">JSS THREE</option>
+                          <option value="SS ONE">SS ONE</option>
+                          <option value="SS TWO">SS TWO</option>
+                          <option value="SS THREE">SS THREE</option>
+                        </select>
+                    </div>
+                        <br>
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-primary form-control">Register</button>
+                  </div>
+                  </form>
+              </div>
+          </div>
+
+          <!-- Parent/Guardian Registartion Form-->
+          <div id="parentsreg" class="row align-items-center">
+              <div class="mx-auto col-10 col-md-8 col-lg-5">
+                <form id="parentsform" class="bg-light p-5 rounded" action="" method="post">
+                  <h2>Parents/Guardian Reg. Form</h2><br>
+                  <div class="form-group">
+                    <label for="childreg"><b>Child/Ward Reg. Number</b> (Enter one even Reg number)</label>
+                    <input type="text" class="form-control" id="childreg" placeholder="Enter Child/ward Reg no..." required>
+                  </div><br>
+                  <div class="form-row">
+                    <div class="col-6 col-md"> 
+                        <label for="parentEmail">Email</label>
+                        <input type="email" class="form-control" id="parentemail" placeholder="Enter your email.." required>
+                    </div>
+                    <div class="col-6 col-md">
+                        <label for="parentsPhone">Phone Number</label>
+                        <input type="text" class="form-control" id="parentsphone" placeholder="Enter your Phone no." required>
+                    </div>
+                  </div><br>
+                  <div class="form-row">
+                    <div class="col-6 col-md"> 
+                        <label for="parentsPassword">Password</label>
+                        <input type="password" class="form-control" id="parentsPassword" placeholder="Enter password.." required>
+                    </div>
+                    <div class="col-6 col-md">
+                        <label for="parentsConfirmPassword">Confirm Password</label>
+                        <input type="password" class="form-control" id="parentsConfirmPassword" placeholder="Confirm password." required>
+                    </div>
+                  </div><br>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary form-control">Register</button>
+                </div>
+                </form>
+              </div>
+          </div>
+
+          <!-- admin Registration Form-->
+          <div id="staffreg" class="row align-items-center">
+              <div class="mx-auto col-10 col-md-8 col-lg-5">
+                <form id="staffform" class="bg-light p-5 rounded" action="" method="post">
+                  <h2>Staff Registration Form</h2><br>
+                  <div class="form-group">
+                  <div class="form-row">
+                    <div class="col-6 col-md"> 
+                        <label for="staffmail"><b>Email</b> (Use official email)</label>
+                        <input type="email" class="form-control" id="staffemail" placeholder="Enter your official email.." required>
+                    </div>
+                    <div class="col-6 col-md">
+                        <label for="staffID"><b>Staff ID</b></label>
+                        <input type="text" class="form-control" id="staffID" placeholder="Enter your ID." required>
+                    </div>
+                  </div><br>
+                  <div class="form-row">
+                    <div class="col-6 col-md"> 
+                        <label for="staffPassword"><b>Password</b></label>
+                        <input type="password" class="form-control" id="staffPassword" placeholder="Enter password.." required>
+                    </div>
+                    <div class="col-6 col-md">
+                        <label for="saffConfirmPassword"><b>Confirm Password</b></label>
+                        <input type="password" class="form-control" id="staffConfirmPassword" placeholder="Confirm password." required>
+                    </div>
+                  </div><br>
+                  <div class="form-group">
+                      <button type="submit" class="btn btn-primary form-control">Register</button>
+                  </div>
+                </form>
+              </div>
+          </div>
+
+          <div class="row align-items-center d-none">
+              <div class="mx-auto col-10 col-md-8 col-lg-5 d-none">
+                <form class="bg-light p-5 rounded" action="" method="post">
+
+                </form>
+              </div>
+          </div>
+        
+      </div>
+      <!-- Create Account Ends here-->
+
+      <div>
+        <a href="#" id="floating-contact">
+          <i class="fa-solid fa-comment fa-flip fa-5x" style="color: #f70808;"></i>        
+        </a>
+    
+        <div id="contact-form" class="bg-light p-4 rounded">
+          <form action="#">
+              <div class="form-group">
+                <p class="text-center bg-light rounded-circle"><span class="text-center">Please fill out the form below and we will<br></span><span class="text-center">get back to you as soon as possible.</span></p>
+                  <label for="name">Name:</label>
+                  <input type="text" class="form-control" id="name" required>
+              </div>
+              <div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="email" class="form-control" id="email" required>
+              </div>
+              <div class="form-group">
+                  <label for="message">Message:</label>
+                  <textarea class="form-control" id="message" rows="3" required></textarea>
+              </div><br>
+              <button type="submit" class="btn btn-primary rounded-circle">Submit</button>
+          </form>
+        </div>
+      </div>
+        
+
+<script src="/static/script/jquery.js" type="text/javascript"></script>
+
+<script>
+  $(document).ready(function() {
+      $('#floating-contact').click(function() {
+          const icon = $(this).find('i');
+
+          if (icon.hasClass('fa-comment-dots')) {
+              icon.removeClass('fa-comment-dots').addClass('fa-times');
+              $('#contact-form').show().addClass('show-form');
+          } else {
+              icon.removeClass('fa-times').addClass('fa-comment-dots');
+              $('#contact-form').hide().removeClass('show-form');
+          }
+      });
+
+
+          $('#createaccount').click(function(){
+            $('#signin').slideUp('slow', function(){
+              $('#selectusertype').slideDown('slow')
+            })  
+          })
+
+          $('.userval').click(function(){
+              var usertype = $(this).val();
+              $('#selectusertype').slideUp('slow')
+              if(usertype == 'students'){
+                  $('#studentsreg').slideDown('slow', function(){
+                      $('.academiclevel').click(function(){
+                        var academiclevel = $(this).val();
+                        if(academiclevel == 'primary'){
+                          $('.primarylevel').slideDown('slow', function(){
+                            $('.secondarylevel').hide('fast')
+                          })
+                        }else{
+                          $('.secondarylevel').slideDown('slow', function(){
+                            $('.primarylevel').hide('fast')
+                          })
+                        }
+                      })
+                  })
+              }else if(usertype == 'parents'){
+                  $('#parentsreg').slideDown('slow')
+              }else{
+                  $('#staffreg').slideDown('slow')
+              }
+          })
+
+          $('#staffform').submit(function(){
+              var staffconfirm = $('#staffconfirmpassword').val();
+              var staffpass = $('#staffpassword').val();
+                if(staffconfirm == staffpass){
+                  $('.btn').addClass('disabled');
+                    alert('password mismatch');
+                    
+                }
+          })
+  });
+</script>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+

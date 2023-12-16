@@ -1,0 +1,50 @@
+{% extends "admin_folder/admin_layout.html" %}
+
+{% block contents %}
+
+
+<table class="table">
+    <tbody>
+        <tr>
+            <th scope="col"><h6><span style="color: rgb(66, 64, 64);">Payment Description</span></h6></th>
+            <td><span>{{deets.associated_stdfee.associated_fee.fees_desc}}</span></h4></td>
+        </tr>
+        <tr>
+            <th scope="col"><h6><span style="color: rgb(66, 64, 64);">Academic Session</span></h6></th>
+            <td><span>{{deets.associated_stdfee.associated_fee.feeses.acases_year}}</span></h4></td>
+        </tr>
+        <tr>
+            <th scope="col"><h6><span style="color: rgb(66, 64, 64);">Academic Term</span></h6></th>
+            <td><span>{{deets.associated_stdfee.associated_fee.feeterm.acaterm_name}}</span></h4></td>
+        </tr>
+        <tr>
+            <th scope="col"><h6><span style="color: rgb(46, 45, 45);">Amount</span></h6></th>
+            <td><span>{{deets.pay_amount}}</span></td>
+        </tr>
+        <tr>
+            <th scope="col"><h6>Payment Method</h6></th>
+            <td><h4><span style="color: red;">{{deets.pay_method}}</span></h4></td>
+        </tr>
+        <tr>
+            <th scope="col"><h6>Date</h6></th>
+            <td><h4><span style="color: red;">{{deets.pay_date}}</span></h4></td>
+        </tr>
+        <tr>
+            <th scope="col"><h6><span style="color: rgb(46, 45, 45);">Teller No(Account Name)</span></h6></th>
+            <td><span>{{deets.pay_verify_deet}}</span></td>
+        </tr>
+        <tr>
+            <th scope="col"><h6>Refrence Number</h6></th>
+            <td><h4><span style="color: red;">{{deets.pay_ref}}</span></h4></td>
+        </tr>
+    </tbody>
+</table>
+<form method="post" class="form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+<div class="mt-5">
+    <button type="submit" class="btn btn-primary rounded" value="Confirmed" name="status" id="btn1">Confirm</button>
+    <button type="submit" class="btn btn-danger rounded" value="On Hold" name="status" id="btn2">Reject</button>
+</div>
+</form>
+
+{% endblock %}

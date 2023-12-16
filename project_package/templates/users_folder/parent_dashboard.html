@@ -1,0 +1,56 @@
+{% extends "users_folder/parent_layout.html" %}
+{% block content %}
+
+<!--DashBoard Starts here-->
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <div>
+        <h2>DashBoard</h2>
+    </div>
+</div>
+<div id="dashboard">
+    
+    <div class="row" style="min-height: 150px; display: flex; align-items: center; justify-content: center;">
+        <div class="col" style="text-align: center;"><img src="{{ url_for('static',filename='img/awaitingconf.png')}}" height="100" width="100"><p>Outstanding Fees : <span style="color: blue;"><b>{{outstanding_fees|count}}</b></span></p></div>
+        <div class="col" style="text-align: center;"><img src="{{ url_for('static',filename='img/overduepay.png')}}" height="100" width="100"><p>Overdue Payment : <span style="color: red;"><b>{{overdue_fees|count}}</b></span></p></div>
+    </div>
+    <br><br><br>
+    <div class="row">
+        <div class="col">
+            <h3>Recent payments:</h3>
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th>S/N</th>
+                        <th>Child Name</th>
+                        <th>Fee Desc</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Session</th>
+                        <th>Term</th>
+                        <th>Class</th>
+                        <th>Method</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in all_payments[-3:] %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <th>{{ u.paidstd.std_firstname }}</th>
+                        <td>{{ u.associated_stdfee.associated_fee.fees_desc }}</td>
+                        <td>{{ u.pay_amount }}</td>
+                        <td>{{ u.pay_date }}</td>
+                        <td>{{u.associated_stdfee.associated_fee.feeses.acases_year}}</td> 
+                        <td>{{u.associated_stdfee.associated_fee.feeterm.acaterm_name}}</td> 
+                        <td>{{u.associated_stdfee.associated_fee.feeclass.class_name}}</td>
+                        <td>{{ u.pay_method }}</td>
+                        <td>{{ u.pay_status }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--DashBoard Ends here-->
+{% endblock %}

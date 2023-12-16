@@ -1,0 +1,39 @@
+{% extends "users_folder/parent_layout.html" %}
+{% block content %}
+ <!--Fess Records Table Starts here-->
+ <div id="feesrec">
+    <table class="table table-responsive">
+        <h1 style="color: blue;">Enrolled Children</h1>
+        <hr><hr>
+        <thead>
+            <tr>
+                <th>S/N</th>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Level</th>
+                <th>Class</th>
+                <th>Date of Birth</th>
+                <th>Reg Number</th>
+                <th>Enrolled Date</th>
+                <th>Campus</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in children %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ u.std_firstname }}</td>
+                <td>{{ u.std_othername }}</td>
+                <td>{{ u.stdlevel.level_name }}</td>
+                <td>{{ u.stdclass.class_name }}</td>
+                <td>{{ u.std_dob }}</td> 
+                <td>{{ u.std_regnumber }}</td>
+                <td>{{ u.std_enrrodate }}</td>
+                <td>{{ u.stdcamp.camp_name }}</td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<!--Fees Records Table Ends here-->
+{% endblock %}

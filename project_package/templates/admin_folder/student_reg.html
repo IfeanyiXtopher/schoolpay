@@ -1,0 +1,144 @@
+{% extends "admin_folder/admin_layout.html" %}
+
+{% block contents %}
+<!--students Records Table Starts here-->
+    <div>
+        <h2 style="color: blue;"><u>Students Registration</u></h2>
+    </div>
+    
+    <div id="studentsreg" class="row align-items-center">
+        <div class="col">
+          <form id="studentupdate" class="bg-light p-5" action="" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+              
+              <div class="form-row"> <!-- Bootstrap's form-row class -->
+                  <div class="col-5 col-md"> 
+                      <label for="regnumber">Registration Number</label>
+                      <input type="text" class="form-control fetch_reg" id="regnumber" name="regnumber">
+                  </div>
+                  &nbsp; &nbsp;
+                  <div class="col-5 col-md">
+                      <label for="enro">Date of Birth</label>
+                      <input type="date" class="form-control enroment fetch_reg" id="dob" name="dob">
+                  </div>
+              </div><br>
+          
+          <div class="form-row"> <!-- Bootstrap's form-row class -->
+            <div class="col-5 col-md"> 
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name">
+            </div>
+            &nbsp; &nbsp;
+            <div class="col-5 col-md">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name">
+            </div>
+          </div><br>
+          <div class="form-row">
+            <div class="col-md-6"> 
+                <label for="midName">Middle Name</label>
+                <input type="text" class="form-control" id="midName" name="midName" placeholder="Enter fullname..">
+            </div>&nbsp; &nbsp;
+            <div class="col-6 col-md">
+                <label for="userpix"><b>Upload Picture</b></label>
+                <input type="file" class="form-control" id="stdpix" name="stdpix" required>
+            </div>
+        </div><br>
+
+          <div class="form-row"><!-- Bootstrap's form-row class -->
+            <div class="col-5 col-md"> 
+                <label for="email">Email Adress</label>
+                <input type="email" class="form-control" id="email" placeholder="email" name="email" required>
+            </div>
+            &nbsp; &nbsp;
+            <div class="col-5 col-md">
+                <label for="dob">Enrroment Date</label>
+                <input type="date" class="form-control" id="enrrol_date" name="enrrol_date">
+            </div>
+          </div><br>
+          <div class="form-row"> <!-- Bootstrap's form-row class -->
+                <div class="col-5 col-md"> 
+                    <label for="parentsName">Campus</label>
+                    <select class="form-select" id="campus" name="campus">
+                      <option value="">Select Campus</option>
+                      <option value="1">Campus 1</option>
+                      <option value="2">Campus 2</option>
+                      <option value="3">Campus 3</option>
+                    </select>
+                </div>
+          </div><br>
+
+          <div class="form-row">
+            <div class="col-5 col-md" style="flex-grow: 1;">
+            <label><b>Select Academic Level</b></label>
+            
+            <div class="form-check">
+                <input class="form-check-input acalevel" name="acalevel" type="radio" value="1" id="primaryRadio">
+                <label class="form-check-label" for="primaryRadio">Primary</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input acalevel" name="acalevel" type="radio" value="2" id="secondaryRadio">
+                <label class="form-check-label" for="secondaryRadio">Secondary</label>
+            </div>
+            </div>
+
+            <div class="col-5 col-md">
+            <label for="acaClass">Academic Class</label>
+            <select class="form-control acaClass" id="acaClass" name="acaClass">
+                <option value="">Select Class</option>
+                <option class="acaClassP" value="1">Primary 1</option>
+                <option class="acaClassP" value="2">Primary 2</option>
+                <option class="acaClassP" value="3">Primary 3</option>
+                <option class="acaClassP" value="4">Primary 4</option>
+                <option class="acaClassP" value="5">Primary 5</option>
+                <option class="acaClassP" value="6">Primary 6</option>
+            
+                <option class="acaClassS" value="7">JSS 1</option>
+                <option class="acaClassS" value="8">JSS 2</option>
+                <option class="acaClassS" value="9">JSS 3</option>
+                <option class="acaClassS" value="10">SS 1</option>
+                <option class="acaClassS" value="11">SS 2</option>
+                <option class="acaClassS" value="12">SS 3</option>
+            </select>
+        </div>
+        </div>
+              <br>
+
+
+            <div class="form-row">
+                <div class="col-6 col-md"> 
+                    <label for="parentsName">Parents Name</label>
+                    <input type="text" class="form-control" id="parentsName" name="parentsName" placeholder="Enter fullname.." required>
+                </div>
+                &nbsp; &nbsp;
+                <div class="col-6 col-md"> 
+                    <label for="acaClass">Relationship</label>
+                    <select class="form-control acaClass" id="relationship" name="relationship">
+                        <option value="primary1">Select Relationship</option>
+                        <option value="Mother">Mother</option>
+                        <option value="Father">Father</option>
+                        <option value="Guardian">Guardian</option>
+                    </select>
+                </div>
+            </div><br>
+
+            <div class="form-row">
+              <div class="col-6 col-md"> 
+                  <label for="parentEmail">Email</label>
+                  <input type="email" class="form-control" id="parentEmail" name="parentEmail" placeholder="Enter your email.." required>
+              </div>
+              &nbsp; &nbsp;
+              <div class="col-6 col-md">
+                  <label for="parentsPhone">Phone Number</label>
+                  <input type="text" class="form-control" id="parentsPhone" name="parentsPhone" placeholder="Enter your Phone no." required>
+              </div>
+            </div><br>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+        </form>
+    </div>
+</div> 
+
+<!--students Registration form Ends here-->
+{% endblock %}

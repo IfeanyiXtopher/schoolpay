@@ -1,0 +1,48 @@
+{% extends "admin_folder/admin_layout.html" %}
+
+{% block contents %}
+ <!--Payments Records Table Starts here-->
+ <div id="pendingpay">
+    <h1 style="color: blue;">Payments Records</h1>
+    <hr><hr>
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>S/N</th>
+                <th>Name</th>
+                <th>Reg.Number</th>
+                <th>Fee Desc</th>
+                <th>Amount</th>
+                <th>Session</th>
+                <th>Term</th>
+                
+                <th>Class</th>
+                <th>Campus</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in payments %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ u.associated_stdfee.associated_student.std_firstname }}{{" "}}{{ u.associated_stdfee.associated_student.std_lastname }}</td>
+                <td>{{ u.associated_stdfee.associated_student.std_regnumber }}</td>
+                <td>{{ u.associated_stdfee.associated_fee.fees_desc }}</td>
+                <td>{{ u.pay_amount }}</td> 
+                <td>{{ u.associated_stdfee.associated_fee.feeses.acases_year }}</td>
+                <td>{{ u.associated_stdfee.associated_fee.feeterm.acaterm_name }}</td> 
+                
+                <td>{{ u.associated_stdfee.associated_fee.feeclass.class_name }}</td>
+                <td>{{ u.associated_stdfee.associated_student.stdcamp.camp_name }}</td>
+                <td>{{ u.pay_date }}</td>
+                <td><span><a href="#" class="btn btn-sm btn-info rounded">Edit</a><a href="#" class="btn btn-sm btn-danger rounded">Del</a></span>
+                </td>
+            </tr>           
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<!--Payments Records Table Ends here-->
+{% endblock %}
+

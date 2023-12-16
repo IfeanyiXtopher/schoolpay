@@ -1,0 +1,38 @@
+{% extends "admin_folder/admin_layout.html" %}
+
+{% block contents %}
+ <!--Parents Records Table Starts here-->
+ <div id="parentsrec">
+    <div>
+        <h2 style="color: blue;"><u>Parents Records</u></h2>
+    </div>
+    <br><br>
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>S/N</th>
+                <th>Fullname</th>
+                <th>Relationship</th>
+                <th>Email Address</th>
+                <th>Phone Number</th>
+                <th>Number of enrroled children</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for parent in parents %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ parent.parents_fullname }}</td>
+                <td>{{ parent.parents_relationship }}</td>
+                <td>{{ parent.parents_email }}</td>
+                <td>{{ parent.parents_phone }}</td>
+                <td>{{ parent.parents_deets|length }}</td> 
+                <td><a href="#" class="btn btn-sm btn-primary">Edit</a>&nbsp;<a href="#" class="btn btn-sm btn-danger">Delete</a></td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<!--Parents Records Table Ends here-->
+{% endblock %}

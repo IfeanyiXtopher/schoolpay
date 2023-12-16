@@ -1,0 +1,44 @@
+{% extends "users_folder/parent_layout.html" %}
+{% block content %}
+ <!--Payments Records Table Starts here-->
+ <div id="pendingpay">
+    <h1 style="color: blue;">Payments Records</h1>
+    <hr><hr>
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>S/N</th>
+                <th>Name</th>
+                <th>Fee Desc</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Session</th>
+                <th>Term</th>
+                <th>Class</th>
+                <th>Method</th>
+                <th>Status</th>
+                <th>Ref. No.</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in all_payments %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <th>{{ u.paidstd.std_firstname }}</th>
+                <td>{{ u.associated_stdfee.associated_fee.fees_desc }}</td>
+                <td>{{ u.pay_amount }}</td>
+                <td>{{ u.pay_date }}</td>
+                <td>{{u.associated_stdfee.associated_fee.feeses.acases_year}}</td> 
+                <td>{{u.associated_stdfee.associated_fee.feeterm.acaterm_name}}</td>
+                <td>{{u.associated_stdfee.associated_fee.feeclass.class_name}}</td>
+                <td>{{ u.pay_method }}</td>
+                <td>{{ u.pay_status }}</td>
+                <td>{{ u.pay_ref }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<!--Payments Records Table Ends here-->
+{% endblock %}
+

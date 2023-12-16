@@ -1,0 +1,102 @@
+{% extends "admin_folder/admin_layout.html" %}
+
+{% block contents %}
+
+<!-- Add Fees Starts here -->
+<div id="addfees" class="row align-items-center">
+    <div class="col">
+        <form id="studentupdate" class="bg-light p-5" action="" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <h1 style="color: blue;">Add Fee</h1>
+
+            <div class="form-row">
+                <div class="col-5 col-md">
+                <label for="feedesc">Fee Desc</label>
+                <input type="text" class="form-control" id="feedesc" name="feedesc">
+            </div>
+            &nbsp; &nbsp;
+            <div class="col-5 col-md">
+                <label for="feeAmount">Amount</label>
+                <input type="text" class="form-control" id="feeAmount" name="feeAmount">
+            </div>
+            </div>
+                <br><br>
+
+            <div class="form-row"> <!-- Bootstrap's form-row class -->
+            <div class="col-5 col-md">
+                <label for="acaSession">Academic Session</label>
+                <select class="form-control" id="acaSession" name="acaSession">
+                    <option value="">Select Session</option>
+                    <option value="2015/2016">2015/2016</option>
+                    <option value="2016/2017">2016/2017</option>
+                    <option value="2017/2018">2017/2018</option>
+                    <option value="2018/2019">2018/2019</option>
+                    <option value="2019/2020">2019/2020</option>
+                    <option value="2020/2021">2020/2021</option>
+                    <option value="2021/2022">2021/2022</option>
+                    <option value="2022/2023">2022/2023</option>
+                    <option value="2023/2024">2023/2024</option>
+                    <option value="2023/2024">2024/2025</option>
+                </select>
+            </div>
+                &nbsp; &nbsp;
+            <div class="col-5 col-md">
+                <label for="feeterm">Academic Term</label>
+                <select class="form-control" id="feeterm" name="feeterm">
+                    <option>Select Academic Term</option>
+                    <option value="First Term">First Term</option>
+                    <option value="Second Term">Second Term</option>
+                    <option value="Third Term">Third Term</option>
+                </select>
+            </div>
+            </div><br><br>
+
+            <div class="form-row">
+                <div class="col-5 col-md" style="flex-grow: 1;">
+                <label><b>Select Academic Level</b></label>
+                </div>
+                <div class="col-5 col-md" style="flex-grow: 4;">
+                <div class="form-check">
+                    <input class="form-check-input acalevel" name="acalevel" type="radio" value="Primary" id="primaryRadio">
+                    <label class="form-check-label" for="primaryRadio">Primary</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input acalevel" name="acalevel" type="radio" value="Secondary" id="secondaryRadio">
+                    <label class="form-check-label" for="secondaryRadio">Secondary</label>
+                </div>
+                </div>
+            </div>
+                <br><br>
+            <div class="form-row">
+                <div class="col-5 col-md">
+                <label for="acaClass">Academic Class</label>
+                <select class="form-control acaClass" id="acaClass" name="acaClass">
+                    <option value="">Select Class</option>
+                    <option class="acaClassP" value="primary1">Primary 1</option>
+                    <option class="acaClassP" value="primary2">Primary 2</option>
+                    <option class="acaClassP" value="primary3">Primary 3</option>
+                    <option class="acaClassP" value="primary4">Primary 4</option>
+                    <option class="acaClassP" value="primary5">Primary 5</option>
+                    <option class="acaClassP" value="primary6">Primary 6</option>
+                
+                    <option class="acaClassS" value="JSS1">JSS 1</option>
+                    <option class="acaClassS" value="JSS2">JSS 2</option>
+                    <option class="acaClassS" value="JSS3">JSS 3</option>
+                    <option class="acaClassS" value="SS1">SS 1</option>
+                    <option class="acaClassS" value="SS2">SS 2</option>
+                    <option class="acaClassS" value="SS3">SS 3</option>
+                </select>
+            </div>
+            &nbsp; &nbsp;
+            <div class="col-5 col-md">
+                <label for="duedate">Due Date</label>
+                <input type="date" class="form-control" id="duedate" name="duedate">
+            </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Add Fee</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

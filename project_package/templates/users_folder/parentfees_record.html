@@ -1,0 +1,39 @@
+{% extends "users_folder/parent_layout.html" %}
+{% block content %}
+ <!--Fess Records Table Starts here-->
+ <div id="feesrec">
+    <table class="table table-responsive">
+        <h1 style="color: blue;">FEES Records</h1>
+        <hr><hr>
+        <thead>
+            <tr>
+                <th>S/N</th>
+                <th>Name</th>
+                <th>Fee Des</th>
+                <th>Amount</th>
+                <th>Session</th>
+                <th>Term</th>
+                <th>Class</th>
+                <th>Due Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in all_fees %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <th>{{ u.associated_student.std_firstname}}</th>
+                <td>{{ u.associated_fee.fees_desc }}</td>
+                <td>{{ u.stdfee_amount }}</td>
+                <td>{{ u.associated_fee.feeses.acases_year }}</td>
+                <td>{{ u.associated_fee.feeterm.acaterm_name }}</td> 
+                <td>{{ u.associated_fee.feeclass.class_name }}</td>
+                <td>{{ u.associated_fee.fees_duedate }}</td>
+                <td>{{ u.stdfee_status }}</td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<!--Fees Records Table Ends here-->
+{% endblock %}

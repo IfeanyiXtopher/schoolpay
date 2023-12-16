@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{url_for('static',filename='assets/bootstrap/css/bootstrap.min.css')}}" type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static',filename='assets/script/animate.min.css')}}" type="text/css">
+  <link rel='stylesheet' href="{{url_for('static',filename='assets/fontawesome/css/all.min.css')}}">
+    <title>Payment Portal</title>
+
+    <style>
+      #floating-contact {
+          position: fixed;
+          bottom: 25px;
+          right: 20px;
+          z-index: 1000;
+      }
+
+      .mybg{
+        background-color: #6c757d;
+      }
+
+      .form-row{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .form-row .col{
+        flex: 1;
+        margin-right: 10px;
+      }
+    
+      #contact-form {
+          position: fixed;
+          top: 100px;
+          right: 20px;
+          z-index: 999;
+          width: 25%;
+          display: none;
+          animation-duration: 0.5s;
+      }
+
+      #studentsreg, #parentsreg, #staffreg
+      {
+        display: none;
+      }
+
+      .universitylevel, .secondarylevel, .primarylevel {
+        display: none;
+      }
+
+
+      @keyframes slideUp {
+         from {
+             transform: translateY(100%);
+          }
+
+          to {
+             transform: translateY(0);
+         }
+     }
+
+      .show-form {
+         animation-name: slideUp;
+      }
+    </style>
+</head>
+<body> 
+      <div class="container-fluid mybg" style="height: 100vh;">     
+        <div id="signin" class="row align-items-center" style="height: 100vh;">
+          <div class="mx-auto col-10 col-md-8 col-lg-5">
+            <!-- Form -->
+            <form class="bg-light p-5 rounded" action="/login" method="post">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+              {% set m = get_flashed_messages(with_categories=True) %}
+              {% if m: %}
+              {%for cat,msg in m:%}
+                  {% if cat == "error"%}
+                      <div class="alert alert-danger">{{msg}}</div>
+                  {% else: %}
+                      <div class="alert alert-success">{{msg}}</div>
+                  {% endif %}
+              {% endfor %}
+              {% endif %}
+
+              <h1>Sign Into Your Account</h1><br>
+              <!-- Input fields -->
+              <div class="form-group">
+                <label for="username"><b>Email:.</b></label>
+                <input type="email" class="form-control username" id="email" placeholder="Email..." name="email" required/>
+              </div>
+              <div class="form-group">
+                <label for="password"><b>Password:.</b></label>
+                <input type="password" class="form-control password" id="password" placeholder="Password..." name="password" required/>
+              </div>
+              <div class="form-group form-check">
+                <a href="#" class="text-decoration-none mb-3 d-block float-end">Forgot password?</a>
+                <input type="checkbox" class="form-check-input" id="rememberMe">
+                <label class="form-check-label" for="rememberMe">Remember me</label>
+            </div>
+    
+              <button type="submit" class="btn btn-primary btn-customized mt-4 form-control rounded">
+                Login
+              </button><br><br>
+              
+            </form>
+            <!-- Form end -->
+            <br>
+            <p class="text-center text-danger rounded bg-light">Any issues? <a href="mailto:nwagaraxtopher1@gmail.com"><b><i>Send us an email</i></b></a> or call our support on <b><i>08032746255</i></b></p>
+          </div>
+      </div>
+
+
+      <div>
+        <a href="#" id="floating-contact">
+          <i class="fa-solid fa-comment fa-flip fa-5x" style="color: #f70808;"></i>        
+        </a>
+    
+        <div id="contact-form" class="bg-light p-4 rounded">
+          <form action="#">
+              <div class="form-group">
+                <p class="text-center bg-light rounded-circle"><span class="text-center">Please fill out the form below and we will<br></span><span class="text-center">get back to you as soon as possible.</span></p>
+                  <label for="name">Name:</label>
+                  <input type="text" class="form-control" id="name" required>
+              </div>
+              <div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="email" class="form-control" id="email" required>
+              </div>
+              <div class="form-group">
+                  <label for="message">Message:</label>
+                  <textarea class="form-control" id="message" rows="3" required></textarea>
+              </div><br>
+              <button type="submit" class="btn btn-primary rounded-circle">Submit</button>
+          </form>
+        </div>
+      </div>
+        
+
+<script src="{{ url_for('static',filename='assets/script/jquery.js')}}" type="text/javascript"></script>
+
+<script>
+  $(document).ready(function() {
+      $('#floating-contact').click(function() {
+          const icon = $(this).find('i');
+
+          if (icon.hasClass('fa-comment-dots')) {
+              icon.removeClass('fa-comment-dots').addClass('fa-times');
+              $('#contact-form').show().addClass('show-form');
+          } else {
+              icon.removeClass('fa-times').addClass('fa-comment-dots');
+              $('#contact-form').hide().removeClass('show-form');
+          }
+      });
+
+
+          $('.userval').click(function(){
+              var usertype = $(this).val();
+              $('#selectusertype').slideUp('slow')
+              if(usertype == 'students'){
+                  $('#studentsreg').slideDown('slow', function(){
+                      $('.academiclevel').click(function(){
+                        var academiclevel = $(this).val();
+                        if(academiclevel == 'primary'){
+                          $('.primarylevel').slideDown('slow', function(){
+                            $('.secondarylevel').hide('fast')
+                          })
+                        }else{
+                          $('.secondarylevel').slideDown('slow', function(){
+                            $('.primarylevel').hide('fast')
+                          })
+                        }
+                      })
+                  })
+              }else if(usertype == 'parents'){
+                  $('#parentsreg').slideDown('slow')
+              }else{
+                  $('#staffreg').slideDown('slow')
+              }
+          })
+
+          $('#staffform').submit(function(){
+              var staffconfirm = $('#staffconfirmpassword').val();
+              var staffpass = $('#staffpassword').val();
+                if(staffconfirm == staffpass){
+                  $('.btn').addClass('disabled');
+                    alert('password mismatch');
+                    
+                }
+          })
+  });
+</script>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+

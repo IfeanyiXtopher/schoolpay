@@ -1,0 +1,35 @@
+{% extends "admin_folder/admin_layout.html" %}
+
+{% block contents %}
+
+ <!--Admin Records Table Starts here-->
+ <div class="col" id="adminrec">
+    <div>
+        <h2 style="color: blue;"><u>Admin Records</u></h2>
+    </div>
+    <br><br>
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>S/N</th>
+                <th>Fullname</th>
+                <th>Staff ID</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for admin in admins %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ admin.admin_firstname }}{{" "}}{{admin.admin_lastname}}</td>
+                <td>{{ admin.admin_staffid }}</td>
+                <td>{{ admin.admin_email }}</td>
+                <td><a href="#" class="btn btn-sm btn-primary">Edit</a>&nbsp;<a href="#" class="btn btn-sm btn-danger">Delete</a></td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<!--Admin Records Table Ends here-->
+{% endblock %}

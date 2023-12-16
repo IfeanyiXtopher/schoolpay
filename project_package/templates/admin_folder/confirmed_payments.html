@@ -1,0 +1,44 @@
+{% extends "admin_folder/admin_layout.html" %}
+
+{% block contents %}
+ <!--Awaiting Confirmation Payments Records Table Starts here-->
+ <div id="awaitingconf">
+    <h1 style="color: blue;">Confirmed Payments</h1>
+    <hr><hr>
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>S/N</th>
+                <th>Name</th>
+                <th>Reg.Number</th>
+                <th>Fee Desc</th>
+                <th>Amount</th>
+                <th>Session</th>
+                <th>Term</th>
+                <th>Class</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in payments %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ u.paidstd.std_firstname }}{{" "}}{{ u.paidstd.std_lastname }}</td>
+                <td>{{ u.paidstd.std_regnumber }}</td>
+                <td>{{ u.associated_stdfee.associated_fee.fees_desc }}</td>
+                <td>{{ u.associated_stdfee.stdfee_amount }}</td> 
+                <td>{{ u.associated_stdfee.associated_fee.feeses.acases_year }}</td>
+                <td>{{ u.associated_stdfee.associated_fee.feeterm.acaterm_name }}</td>
+                <td>{{ u.associated_stdfee.associated_fee.feeclass.class_name }}</td>
+                <td>{{ u.pay_date }}</td>
+                <td>{{ u.pay_status }}</td>
+                <td><span><a href="{{url_for('viewconfirmed_pay',id=u.pay_id)}}" class="btn btn-sm btn-info rounded">VIEW</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<!--Awaiting Confirmation Payments Records Table Ends here-->
+{% endblock %}

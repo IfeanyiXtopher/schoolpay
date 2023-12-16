@@ -1,0 +1,50 @@
+{% extends "admin_folder/admin_layout.html" %}
+
+{% block contents %}
+<!--students Records Table Starts here-->
+    <div>
+        <h2 style="color: blue;"><u>Admin Registration</u></h2>
+        <hr>
+    </div>
+    
+
+      <div id="staffregister" class="row align-items-center">
+         <div class="col">
+          <form id="staffform" class="bg-light p-5 rounded" action="" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="form-row">
+              <div class="col-10 col-md"> 
+                  <label for="staffmail"><b>Email</b> (Use official email)</label>
+                  <input type="email" class="form-control" id="staffemail" name="staffemail" placeholder="Enter staff official email.." required>
+              </div>
+              &nbsp; &nbsp;
+              <div class="col-10 col-md">
+                  <label for="staffID"><b>Staff ID</b></label>
+                  <input type="text" class="form-control" id="staffID" name="staffID" placeholder="Enter your ID." required>
+              </div>
+            </div><br>
+            <div class="form-row">
+              <div class="col-10 col-md"> 
+                  <label for="stafffname"><b>firstName</b></label>
+                  <input type="text" class="form-control" id="stafffname" name="stafffname" placeholder="Enter firstName.." required>
+              </div>
+              &nbsp; &nbsp;
+              <div class="col-10 col-md">
+                  <label for="safflname"><b>lastName</b></label>
+                  <input type="text" class="form-control" id="stafflname" name="stafflname" placeholder="last name." required>
+              </div>
+            </div><br>
+            <div class="col-10 col-md">
+              <label for="userpix"><b>Upload Picture</b></label>
+              <input type="file" class="form-control" id="userpix" name="userpix" required>
+          </div>
+        </div><br>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+<!--Admin Registration form Ends here-->
+{% endblock %}

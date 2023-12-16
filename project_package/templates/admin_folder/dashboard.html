@@ -1,0 +1,63 @@
+{% extends "admin_folder/admin_layout.html" %}
+
+{% block contents %}
+<!--DashBoard Starts here-->
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <div>
+        <h2>DashBoard</h2>
+    </div>
+</div>
+<div id="dashboard">
+    
+    <div class="row" style="min-height: 150px; display: flex; align-items: center; justify-content: center;">
+        <div class="col" style="text-align: center;"><img src="{{ url_for('static',filename='img/awaitingconf.png')}}" height="100" width="100"><p>Awaiting payment Confirmation: <span><b><a style="text-decoration: none;" href="{{url_for('add_awaitingconf')}}"><span  style="color: blue;">{{awaitingpayments|count}}</span></a></b></span></p></div>
+        <div class="col" style="text-align: center;"><img src="{{ url_for('static',filename='img/confirmed.png')}}" height="100" width="100"><p>Confirmed Payments: <span><b><a style="text-decoration: none;" href="{{url_for('confirmed')}}"><span style="color: green;">{{confirmed|count}}</span></a></b></span></p></div>
+        <div class="col" style="text-align: center;"><img src="{{ url_for('static',filename='img/overduepay.png')}}" height="100" width="100"><p>Overdue Payment: <span><b><a style="text-decoration: none;" href="{{url_for('overdue_payments')}}"><span  style="color: red;">{{overdue_payments|count}}</span></a></b></span></p></div>
+    </div>
+    <div class="row" style="min-height: 150px; display: flex; align-items:center; justify-items: center;">
+        <div class="col" style="text-align: center;"><img src="{{ url_for('static',filename='img/students.png')}}" height="100" width="150"><p>Registered Students : <span style="color: blue;"><b>{{stddeets|count}}</b></span></p></div>
+        <div class="col" style="text-align: center;"><img src="{{ url_for('static',filename='img/allparents.png')}}" height="100" width="150"><p>Registered Parents: <span style="color: blue;"><b>{{parentsdeets|count}}</b></span></p></div>
+        <div class="col" style="text-align: center;"><img src="{{ url_for('static',filename='img/users.png')}}" height="100" width="150"><p>Registered Users: <span style="color: blue;"><b>{{ stddeets|count + parentsdeets|count + admindeets|count }}</b></span></p></div>
+    </div>
+    <div class="row" style="min-height: 150px;">
+        <div class="col">
+            <h3>Recent payments:</h3>
+            <table class="table">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">S/N</th>
+                        <th scope="col">Student Name</th>
+                        <th scope="col">Reg. Number</th>
+                        <th scope="col">Class</th>
+                        <th scope="col">Campus</th>
+                        <th scope="col">fees Desc</th>
+                        <th scope="col">Session</th>
+                        <th scope="col">Term</th>
+                        <th scope="col">Amount</th>
+                    
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in payments %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ u.associated_stdfee.associated_student.std_firstname }}{{" "}}{{ u.associated_stdfee.associated_student.std_lastname }}</td>
+                        <td>{{ u.associated_stdfee.associated_student.std_regnumber }}</td>
+                        <td>{{ u.associated_stdfee.associated_fee.feeclass.class_name }}</td>
+                        <td>{{ u.associated_stdfee.associated_student.stdcamp.camp_name }}</td>
+                        <td>{{ u.associated_stdfee.associated_fee.fees_desc }}</td>
+                        <td>{{ u.associated_stdfee.associated_fee.feeses.acases_year }}</td>
+                        <td>{{ u.associated_stdfee.associated_fee.feeterm.acaterm_name }}</td> 
+                        <td>{{ u.pay_amount }}</td> 
+                        
+                        <td>{{ u.pay_date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--DashBoard Ends here-->
+{% endblock contents %}

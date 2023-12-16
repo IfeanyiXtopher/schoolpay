@@ -1,0 +1,97 @@
+{% extends "admin_folder/admin_layout.html" %}
+
+{% block contents %}
+
+<!-- Add Fees Starts here -->
+<div id="addfees" class="row align-items-center">
+    <div class="col">
+        <form id="studentupdate" class="bg-light p-5" action="" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <h1 style="color: blue;">Add Fee</h1>
+
+            <div class="form-row">
+                <div class="col-5 col-md">
+                <label for="feedesc">Fee Desc</label>
+                <input type="text" class="form-control" id="feedesc" value="{{ deets.fees_desc}}" name="feedesc">
+            </div>
+            &nbsp; &nbsp;
+            <div class="col-5 col-md">
+                <label for="feeAmount">Amount</label>
+                <input type="text" class="form-control" id="feeAmount" value="{{deets.fees_amount}}" name="feeAmount">
+            </div>
+            </div>
+                <br><br>
+
+            <div class="form-row"> <!-- Bootstrap's form-row class -->
+            <div class="col-5 col-md">
+                <label for="acaSession">Academic Session</label>
+                <select class="form-control" id="acaSession" name="acaSession">
+                    
+                    {% for session in sessions %}
+                    {% if deets.fees_acasesid == session.acases_id%}
+                    <option value="{{session.acases_id}}">{{session.acases_year}}</option>
+                    {% else %}
+                    <option value="{{session.acases_id}}">{{session.acases_year}}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+                &nbsp; &nbsp;
+            <div class="col-5 col-md">
+                <label for="feeterm">Academic Term</label>
+                <select class="form-control" id="feeterm" name="feeterm">
+                    
+                    {% for term in terms %}
+                    {% if deets.fees_acatermid == term.term_id%}
+                    <option value="{{term.acaterm_id}}">{{ term.acaterm_name}}</option>
+                    {% else %}
+                    <option value="{{term.acaterm_id}}">{{ term.acaterm_name}}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            </div><br><br>
+
+            <div class="form-row">
+                <div class="col-5 col-md" style="flex-grow: 1;">
+                <label><b>Select Academic Level</b></label>
+                </div>
+                <div class="col-5 col-md" style="flex-grow: 4;">
+                    <div class="form-check">
+                        <input class="form-check-input acalevel" name="acalevel" type="radio" value="1" id="primaryRadio" {% if deets.fees_levelid == 1 %}checked="checked"{% endif %}>
+                        <label class="form-check-label" for="primaryRadio">Primary</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input acalevel" name="acalevel" type="radio" value="2" id="secondaryRadio" {% if deets.fees_levelid == 2 %}checked="checked"{% endif %}>
+                        <label class="form-check-label" for="secondaryRadio">Secondary</label>
+                    </div>
+                    </div>
+            </div>
+                <br><br>
+            <div class="form-row">
+                <div class="col-5 col-md">
+                <label for="acaClass">Academic Class</label>
+                <select class="form-control acaClass" id="acaClass" name="acaClass">
+                    
+                    {% for clas in classes %}
+                    {% if clas.class_id == deets.fees_classid%}
+                    <option class="{{clas.class_name}}" value="{{ clas.class_id }}">{{ clas.class_name}}</option>
+                    {% else %}
+                    <option class="{{clas.class_name}}" value="{{ clas.class_id }}">{{ clas.class_name}}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            &nbsp; &nbsp;
+            <div class="col-5 col-md">
+                <label for="duedate">Due Date</label>
+                <input type="date" class="form-control" id="duedate" value="{{deets.fees_duedate}}" name="duedate">
+            </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Update Fee</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

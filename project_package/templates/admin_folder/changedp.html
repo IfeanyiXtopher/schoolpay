@@ -1,0 +1,25 @@
+
+{% extends "admin_folder/admin_layout.html" %}
+
+{% block contents %}
+
+<div class="content" style="color: darkcyan; padding: 3em;">
+  <h3>Change Your Profile</h3>
+  <form enctype="multipart/form-data" method="post">
+    {{ dpform.csrf_token }}
+
+    {% if dpform.dp.errors %}
+    <div class="alert alert-danger"> {{ dpform.dp.errors}}</div>
+    {% endif %}
+
+    <div class="mb-3">
+        {{ dpform.dp.label}}
+        {{ dpform.dp }}
+    </div>
+
+    <div class="mb-3">
+        {{ dpform.btnupload(class='btn btn-danger noround')}}
+    </div>
+  </form>
+</div>
+{% endblock %}

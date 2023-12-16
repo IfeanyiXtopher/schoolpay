@@ -1,0 +1,42 @@
+{% extends "admin_folder/admin_layout.html" %}
+
+{% block contents %}
+ <!--Fess Records Table Starts here-->
+ <div id="feesrec">
+    <table class="table table-responsive">
+        <h1 style="color: blue;">FEES Records</h1>
+        <hr><hr>
+        <thead>
+            <tr>
+                <th>S/N</th>
+                <th>Fee Des</th>
+                <th>Amount</th>
+                <th>Session</th>
+                <th>Term</th>
+                <th>Level</th>
+                <th>Class</th>
+                <th>Due Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in fees %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ u.fees_desc }}</td>
+                <td>{{ u.fees_amount }}</td>
+                <td>{{ u.feeses.acases_year }}</td>
+                <td>{{ u.feeterm.acaterm_name }}</td> 
+                <td>{{ u.feelevel.level_name }}</td> 
+                <td>{{ u.feeclass.class_name }}</td>
+                <td>{{ u.fees_duedate }}</td>
+                <td><a href="{{url_for('edit_fee', fee_id=u.fees_id)}}" class="btn btn-info">Edit</a>
+                    <a href="{{ url_for('delete_fee', fee_id=u.fees_id) }}" onclick="return confirmDelete();" class="btn btn-danger">Delete</a>
+                </td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<!--Fees Records Table Ends here-->
+{% endblock %}

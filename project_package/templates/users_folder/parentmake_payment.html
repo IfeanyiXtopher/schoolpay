@@ -1,0 +1,39 @@
+{% extends "users_folder/parent_layout.html" %}
+{% block content %}
+<h1>Payment Form</h1>
+
+<form id="paymenttype" class="form" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <div class="col-10 col-md">
+    <select class="form-control" name="fee_to_pay">
+        <option value="">Select Fee(s)</option>
+    {% for fee in outstanding_fees %}
+        <option value="{{ fee.stdfee_id }}">
+            {{ fee.associated_fee.fees_desc }} -  
+            N{{ fee.stdfee_amount }}  
+            {{fee.associated_fee.feeses.acases_year}} Academic session, 
+            {{fee.associated_fee.feeterm.acaterm_name}}
+        </option>
+    {% endfor %}
+    </select>
+    </div>
+    <br><br>
+    <h3>Payment Method</h3>
+    <div>
+        <input type="radio" id="card" name="payment_method" value="card">
+        <label for="card">Card</label>
+    </div>
+    <div>
+        <input type="radio" id="bank_deposit" name="payment_method" value="cash_deposit">
+        <label for="cash_deposit">Cash Deposit</label>
+    </div>
+    <div>
+        <input type="radio" id="bank_transfer" name="payment_method" value="bank_transfer">
+        <label for="bank_transfer">Bank Transfer</label>
+    </div>
+    <br>
+
+        <button type="submit" class="btn btn-primary">Proceed</button>
+    
+</form>
+{% endblock %}
